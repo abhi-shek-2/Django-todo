@@ -40,20 +40,22 @@ pipeline {
             }
         }
         
-        stage('Update K8S manifest & push to Repo'){
+        stage('Update Deployment File') {
+            environment {
+                GIT_REPO_NAME = "CICD-Test"
+                GIT_USER_NAME = "abhi-shek-2"
+            }
             steps {
-                script{
-                    withCredentials([usernamePassword(credentialsId: 'Github_LOGIN', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        sh '''
-                        cat deploy.yaml
-                        sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
-                        cat deploy.yaml
-                        git add deploy.yaml
-                        git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
-                        git remote -v
-                        git push https://github.com/abhi-shek-2/Django-todo/deploy.git HEAD:main
-                        '''                        
-                    }
+                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                    sh '''
+                        git config user.email "abhi.786.35@gmail.com"
+                        git config user.name "Abhishek Rana"
+                        BUILD_NUMBER=${BUILD_NUMBER}
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deploy/deplo.yml
+                        git add deploy/deplo.yml
+                        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                    '''
                 }
             }
         }
