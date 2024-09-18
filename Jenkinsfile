@@ -42,7 +42,7 @@ pipeline {
         
         stage('Update Deployment File') {
             environment {
-                GIT_REPO_NAME = "CICD-Test"
+                GIT_REPO_NAME = "Django-todo"
                 GIT_USER_NAME = "abhi-shek-2"
             }
             steps {
