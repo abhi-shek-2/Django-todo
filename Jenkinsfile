@@ -45,7 +45,7 @@ pipeline {
                         git config user.name "Abhishek Rana"
                         BUILD_NUMBER=${BUILD_NUMBER}
                         cat deploy/deploy.yaml
-                        sed -i "s/todo-app:18/todo-app:${BUILD_NUMBER}/g" deploy/deploy.yaml
+                        sed -i "s/todo-app:19/todo-app:${BUILD_NUMBER}/g" deploy/deploy.yaml
                         git add deploy/deploy.yaml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         git push https://${GIT_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
@@ -66,7 +66,7 @@ pipeline {
                         git config user.name "Abhishek Rana"
                         BUILD_NUMBER=${BUILD_NUMBER}
                         cat Jenkinsfile
-                        sed -i "s/todo-app:18/todo-app:${BUILD_NUMBER}/g" Jenkinsfile
+                        sed -i "s/todo-app:19/todo-app:${BUILD_NUMBER}/g" Jenkinsfile
                         git add Jenkinsfile
                         git commit -m "Update Jenkinsfile file  to version ${BUILD_NUMBER}"
                         git push https://${GIT_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
