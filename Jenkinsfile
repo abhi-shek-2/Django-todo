@@ -44,7 +44,7 @@ pipeline {
                         git config user.email "abhi.786.35@gmail.com"
                         git config user.name "Abhishek Rana"
                         BUILD_NUMBER=${BUILD_NUMBER}
-                        sed -i '' "s/32/${BUILD_NUMBER}/g" deploy/deploy.yaml
+                        sed -i '' "s/10/${BUILD_NUMBER}/g" deploy/deploy.yaml
                         git add deploy/deploy.yaml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         git push https://${GIT_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
