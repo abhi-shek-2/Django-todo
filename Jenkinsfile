@@ -32,14 +32,7 @@ pipeline {
             }
         }
         
-        stage('Checkout K8S manifest SCM'){
-            steps {
-                git credentialsId: 'Github_LOGIN', 
-                url: 'https://github.com/abhi-shek-2/Django-todo/deploy.git',
-                branch: 'main'
-            }
-        }
-        
+
         stage('Update Deployment File') {
             environment {
                 GIT_REPO_NAME = "Django-todo"
